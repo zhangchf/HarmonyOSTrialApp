@@ -30,24 +30,13 @@ struct HttpRequestDemo {
         this.users = users
       })
     .catch((error) => {
-      this.error = error
+      this.error = error.message
       this.dialogController.open()
     })
-    // requestWebData(
-    //   "https://jsonplaceholder.typicode.com/users",
-    //   (data) => {
-    //     this.users = JSON.parse(data) as User[]
-    //     this.result = data
-    //   },
-    //   (error) => {
-    //     this.error = error
-    //     this.dialogController.open()
-    //   }
-    // )
   }
 
   aboutToAppear() {
-    setTimeout(this.requestData.bind(this), 3000)
+    setTimeout(this.requestData.bind(this), 1000)
   }
 
   build() {
@@ -110,7 +99,7 @@ struct CustomDialogExample {
 
   build() {
     Column() {
-      Text(this.message).fontSize(20).margin({ top: 10, bottom: 10 })
+      Text(this.message).fontSize(20).margin({ top: "60px", bottom: "20vp" }).fontColor(Color.Red)
       Flex({ justifyContent: FlexAlign.SpaceAround }) {
         Button('Cancel', { type: ButtonType.Normal })
           .onClick(() => {
@@ -126,7 +115,7 @@ struct CustomDialogExample {
               this.confirm()
             }
           }).backgroundColor(0xffffff).fontColor(Color.Black)
-      }.margin({ bottom: 10 })
+      }.margin({ bottom: 20 })
     }
     .backgroundColor(0x88000000)
   }
