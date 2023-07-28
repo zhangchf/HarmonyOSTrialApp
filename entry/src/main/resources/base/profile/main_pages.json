@@ -2,6 +2,10 @@
   "src": [
     "pages/Index",
     "pages/WebviewDemo",
-    "pages/HttpRequestDemo"
+    "pages/HttpRequestDemo",
+    "pages/PullToRefreshDemo",
+    "pages/PullToRefreshDemo2",
+    "pages/RefreshContainer",
+    "pages/RefreshListTest"
   ]
 }
