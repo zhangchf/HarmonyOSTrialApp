@@ -48,6 +48,12 @@ struct Index {
           .onClick(() => {
             router.pushUrl({ url: 'pages/RefreshListTest'})
           })
+
+        Button('Lottie Animation', { type: ButtonType.Capsule, stateEffect: true})
+          .margin({top: 20})
+          .onClick(() => {
+            router.pushUrl({ url: 'pages/LottieDemo'})
+          })
       }
       .width('100%')
     }

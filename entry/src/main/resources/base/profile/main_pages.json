@@ -6,6 +6,7 @@
     "pages/PullToRefreshDemo",
     "pages/PullToRefreshDemo2",
     "pages/RefreshContainer",
-    "pages/RefreshListTest"
+    "pages/RefreshListTest",
+    "pages/LottieDemo"
   ]
 }
