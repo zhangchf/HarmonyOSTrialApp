@@ -1,4 +1,5 @@
 import router from '@ohos.router';
+import resourceManager from '@ohos.resourceManager';
 
 @Entry
 @Component
@@ -11,7 +12,6 @@ struct Index {
         Text(this.message)
           .fontSize(50)
           .fontWeight(FontWeight.Bold)
-
 
         Button('Webview', { type: ButtonType.Normal, stateEffect: true})
           .margin({top: 20})
@@ -53,6 +53,12 @@ struct Index {
           .margin({top: 20})
           .onClick(() => {
             router.pushUrl({ url: 'pages/LottieDemo'})
+          })
+
+        Button('Property Animation', { type: ButtonType.Capsule, stateEffect: true})
+          .margin({top: 20})
+          .onClick(() => {
+            router.pushUrl({ url: 'pages/PropertyAnimation'})
           })
       }
       .width('100%')
