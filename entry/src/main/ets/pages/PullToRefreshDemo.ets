@@ -26,14 +26,14 @@ struct PullToRefreshDemo {
       // Divider()
 
       List({scroller: this.scroller}) {
-        ForEach(this.data, (item) => {
+        ForEach(this.data, (item: number) => {
           ListItem() {
             Text(`Item ${item}`)
           }
           .height(50)
           .width("100%")
           .backgroundColor(Color.Orange)
-        }, (item) => item)
+        }, (item: number) => item.toString())
       }
       .divider({strokeWidth: 1})
       .onScroll((scrollOffset, _) => {
@@ -50,7 +50,7 @@ struct PullToRefreshDemo {
 
   }
 
-  private downY: number = undefined
+  private downY: number = 0
   private isRefreshing = false
 
   handleTouchEvent(event: TouchEvent) {

@@ -15,6 +15,15 @@ export default class EntryAbility extends UIAbility {
     // Main window is created, set main page for this ability
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
 
+    windowStage.getMainWindow().then((mainWindow) => {
+      // mainWindow.setWindowSystemBarEnable([])
+      // mainWindow.setWindowLayoutFullScreen(true)
+      // mainWindow.setWindowSystemBarProperties({
+      //   statusBarColor: "0x88ffffff",
+      //   navigationBarColor: "0x000000"
+      // })
+    })
+
     windowStage.loadContent('pages/Index', (err, data) => {
       if (err.code) {
         hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');

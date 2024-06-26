@@ -6,6 +6,13 @@ import resourceManager from '@ohos.resourceManager';
 struct Index {
   @State message: string = 'Hello World'
 
+  onPageShow() {
+    console.log('zcf Index: onPageShow')
+    myAsyncFunction().then((result) => {
+      console.log(`zcf: ${result}`)
+    })
+  }
+
   build() {
     Row() {
       Column() {
@@ -65,4 +72,16 @@ struct Index {
     }
     .height('100%')
   }
+}
+
+async function myAsyncFunction() {
+  const result = await new Promise((resolve: (value: string) => void) => {
+    setTimeout(() => {
+      resolve('zcf Hello, world!');
+    }, 3000);
+  });
+  console.info(String(result)); // 输出： Hello, world!
+  return new Promise((resolve : (number: number) => void, reject : (reason: string) => void) => {
+    resolve(1000)
+  })
 }

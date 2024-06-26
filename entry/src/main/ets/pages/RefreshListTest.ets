@@ -1,13 +1,13 @@
-import { refresh } from "./RefreshList"
+import { RefreshList } from "./RefreshList"
 
 @Entry
 @Component
 struct ArkUIClubRefreshListTest {
 
-  @State dataSet: Array<string> = undefined;
+  @State dataSet: Array<string> = [];
   @State refreshing: boolean = false;
 
-  @Builder itemLayout(item: any, index: number) {
+  @Builder itemLayout(item: string, index: number) {
     Text("item：" + item + ", index: " + index)
       .width('100%')
       .height(100)
@@ -34,10 +34,10 @@ struct ArkUIClubRefreshListTest {
       .height(50)
 
       Column() {
-        refresh.RefreshList({
+        RefreshList({
           refreshing: $refreshing,
           dataSet: $dataSet,
-          itemLayout: (item: any, index: number) => {
+          itemLayout: (item: string, index: number) => {
             this.itemLayout(item, index);
           },
           onRefresh: () => {
@@ -68,8 +68,8 @@ struct ArkUIClubRefreshListTest {
   }
 
   private initDataSet(start: number, count: number) {
-    var dataSet = new Array<string>();
-    for (var i = 0; i < count; i++) {
+    let dataSet = new Array<string>();
+    for (let i = 0; i < count; i++) {
       dataSet.push((i + start).toFixed(2));
     }
     this.dataSet = dataSet;

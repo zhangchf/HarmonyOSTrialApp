@@ -8,7 +8,7 @@ import { userRepo } from "../repo/UserRepo"
 @Component
 struct HttpRequestDemo {
   @State error: string = ""
-  @State users: User[] = null
+  @State users: User[] = []
 
   dialogController = new CustomDialogController({
     builder: CustomDialogExample({
@@ -29,7 +29,7 @@ struct HttpRequestDemo {
       .then((users) => {
         this.users = users
       })
-    .catch((error) => {
+    .catch((error: Error) => {
       this.error = error.message
       this.dialogController.open()
     })
@@ -43,10 +43,10 @@ struct HttpRequestDemo {
     if (this.users) {
       Scroll(new Scroller()) {
         Column() {
-          ForEach(this.users, (user) => {
+          ForEach(this.users, (user: User) => {
             // Text(`${user.name}, ${user.email}`)
             UserCell({user: user})
-          }, (user) => user.id)
+          }, (user: User) => user.id.toString())
 
           Divider()
         }
@@ -79,13 +79,20 @@ function matchParentSize() {
 
 @Component
 struct UserCell {
-  user: User
+  private user?: User;
+
+  constructor(user: User) {
+    super();
+    this.user = user;
+  }
 
   build() {
-    Row() {
-      Text(this.user.name).borderColor(Color.Pink).borderWidth(2)
-      Divider().vertical(true).color(Color.Red).strokeWidth(5).lineCap(LineCapStyle.Butt).height(20)
-      Text(this.user.email).borderColor(Color.Blue).borderWidth(2)
+    if (this.user) {
+      Row() {
+        Text(this.user.name).borderColor(Color.Pink).borderWidth(2)
+        Divider().vertical(true).color(Color.Red).strokeWidth(5).lineCap(LineCapStyle.Butt).height(20)
+        Text(this.user.email).borderColor(Color.Blue).borderWidth(2)
+      }
     }
   }
 }
@@ -93,9 +100,9 @@ struct UserCell {
 @CustomDialog
 struct CustomDialogExample {
   controller: CustomDialogController
-  message: string
-  cancel: () => void
-  confirm: () => void
+  message?: string
+  cancel?: () => void
+  confirm?: () => void
 
   build() {
     Column() {
@@ -104,14 +111,14 @@ struct CustomDialogExample {
         Button('Cancel', { type: ButtonType.Normal })
           .onClick(() => {
             this.controller.close()
-            if (this.cancel != null) {
+            if (this.cancel) {
               this.cancel()
             }
           }).backgroundColor(0xffffff).fontColor(Color.Black).opacity(0.5)
         Button('Refresh')
           .onClick(() => {
             this.controller.close()
-            if (this.confirm != null) {
+            if (this.confirm) {
               this.confirm()
             }
           }).backgroundColor(0xffffff).fontColor(Color.Black)

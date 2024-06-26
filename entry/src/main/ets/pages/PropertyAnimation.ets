@@ -1,8 +1,13 @@
+
+interface AnimateIcon {
+  imgRes: Resource,
+  delay: number
+}
+
 @Entry
 @Component
 struct PropertyAnimation {
-
-  private animateIcons = [
+  private animateIcons: AnimateIcon[] = [
     {
       imgRes: $r('app.media.ic_loading_game'),
       delay: 400
@@ -35,7 +40,8 @@ struct PropertyAnimation {
 
   @State iconWidth: number = 30
 
-  @Builder AnimatedIcon(iconRes, delay) {
+  @Builder
+  AnimatedIcon(iconRes: Resource, delay: number) {
     Image(iconRes)
       .width(`${this.iconWidth}vp`)
       .aspectRatio(1)
@@ -60,7 +66,7 @@ struct PropertyAnimation {
       //   this.AnimatedIcon(item.imgRes, 400*index)
       // }, (item) => JSON.stringify(item))
 
-      ForEach(this.animateIconsArray, (item, index) => {
+      ForEach(this.animateIconsArray, (item: Resource, index) => {
         this.AnimatedIcon(item, 400*index)
       }, (item: Resource) => item.id.toString())
     }

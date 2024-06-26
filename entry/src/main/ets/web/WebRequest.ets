@@ -23,6 +23,6 @@ export async function requestWebData(url: string) {
     let response = await request
     return response.result
   } catch (error) {
-    throw error
+    throw error as Error
   }
 }

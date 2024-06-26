@@ -9,7 +9,7 @@ struct PullToRefreshDemo2 {
   //-1 代表正常状态 0代表下拉刷新 1 代表上拉加载
   @State loadingText: string = '正在刷新' //文本
   @State IsShowLoading: boolean = false //动画显示隐藏 默认是显示状态
-  private rotateTimeOut: any //计时器
+  private rotateTimeOut: number = 0 //计时器
   @State rotateAngle: number = 0;
   //加载图标旋转
   loadingRotate() {
@@ -21,7 +21,7 @@ struct PullToRefreshDemo2 {
     }, 800)
   }
 
-  public ActionStart(event) {
+  public ActionStart() {
     this.clearRotate()
     if (this.firstIndex === 0 && this.arr.length > 0) { //判断是否刷新
       this.IsShowLoading = true;
@@ -53,20 +53,20 @@ struct PullToRefreshDemo2 {
   //网络加载数据
   private loadingData() {
     console.log("loadingData=====")
-    var that = this;
+    let that = this;
     //延迟几秒执行这个代码 取消动画
-    setTimeout(function () {
-      console.log("loadingData=====开始")
-      var random = Math.ceil(Math.random() * 10);
+    setTimeout(() => {
+      console.log("loadingData=====开始");
+      let random = Math.ceil(Math.random() * 10);
       ;
-      that.arr.splice(0, 8)
-      for (var i = random;i < random + 8; i++) {
-        that.arr.push(that.AllData[i])
+      that.arr.splice(0, 8);
+      for (let i = random; i < random + 8; i++) {
+        that.arr.push(that.AllData[i]);
       }
-      console.log("loadingData=====clearInterval")
-      that.clearRotate()
-      console.log("loadingData===取消动画")
-      that.IsShowLoading = false
+      console.log("loadingData=====clearInterval");
+      that.clearRotate();
+      console.log("loadingData===取消动画");
+      that.IsShowLoading = false;
     }, 5000)
   }
 
@@ -102,7 +102,7 @@ struct PullToRefreshDemo2 {
         }
         .visibility((this.IsShowLoading ? Visibility.Visible : Visibility.None)) //Todo 动画显示隐藏
 
-        ForEach(this.arr, (item) => {
+        ForEach(this.arr, (item: string) => {
           ListItem() {
             Text('' + item)
               .width('100%')
@@ -112,7 +112,7 @@ struct PullToRefreshDemo2 {
               .borderRadius(10)
               .backgroundColor(0xFFFFFF)
           }
-        }, item => item)
+        }, (item: string) => item)
       }
       .listDirection(Axis.Vertical) // 排列方向
       .onScrollIndex((firstIndex: number, lastIndex: number) => {
